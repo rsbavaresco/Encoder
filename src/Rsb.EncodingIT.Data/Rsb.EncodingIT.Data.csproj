@@ -4,4 +4,8 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Rsb.EncodingIT.Models\Rsb.EncodingIT.Models.csproj" />
+  </ItemGroup>
+
 </Project>

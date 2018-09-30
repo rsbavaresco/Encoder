@@ -5,7 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Bootstrap\" />
+    <ProjectReference Include="..\Rsb.EncodingIT.Data\Rsb.EncodingIT.Data.csproj" />
+    <ProjectReference Include="..\Rsb.EncodingIT.Decoder\Rsb.EncodingIT.Decoder.csproj" />
+    <ProjectReference Include="..\Rsb.EncodingIT.Encoder\Rsb.EncodingIT.Encoder.csproj" />
+    <ProjectReference Include="..\Rsb.EncodingIT.Models\Rsb.EncodingIT.Models.csproj" />
+    <ProjectReference Include="..\Rsb.EncodingIT.Pool\Rsb.EncodingIT.Pool.csproj" />
   </ItemGroup>
 
 </Project>
