@@ -9,6 +9,7 @@ namespace Rsb.EncodingIT.Models.Coded
     {
         public FileHeader Header { get; private set; }
         public MemoryStream Content { get; private set; }
+        public string Path { get; private set; }
 
         public EncodedFile(FileHeader header, byte[] content)
         {
@@ -20,6 +21,11 @@ namespace Rsb.EncodingIT.Models.Coded
         {
             Header = header;
             Content = content;
+        }
+
+        public void SetPath(string path)
+        {
+            Path = path;
         }
     }
 }

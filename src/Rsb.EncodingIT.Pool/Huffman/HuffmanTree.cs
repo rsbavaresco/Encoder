@@ -43,9 +43,11 @@ namespace Rsb.EncodingIT.Pool.Huffman
             Frequencies = new HuffmanFrequencyTable();
         }
 
-        public HuffmanTree(HuffmanFrequencyTable frequencies)
+        public HuffmanTree(HuffmanFrequencyTable frequencies, int bitCountForTree)
         {
             Frequencies = frequencies;
+            BitCountForTree = bitCountForTree;
+            _nodes = new List<HuffmanNode>();
         }
         #endregion
 

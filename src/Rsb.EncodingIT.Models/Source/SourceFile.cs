@@ -17,10 +17,23 @@ namespace Rsb.EncodingIT.Models.Source
             ReadExtension();
         }
 
+        public SourceFile(string path, byte[] content, string extension)
+        {
+            Path = path;
+            Content = content;
+            Extension = extension;
+        }
+
+        public void SetPath(string path)
+        {
+            Path = path;
+        }
+
         private void ReadExtension()
         {
             var index = Path.LastIndexOf('.') + 1;
-            Extension = Path.Substring(index, Path.Length - index);
+            if (index > 1) Extension = Path.Substring(index, Path.Length - index);
+            else Extension = string.Empty;
         }
     }
 }

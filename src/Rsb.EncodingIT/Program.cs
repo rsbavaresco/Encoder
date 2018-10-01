@@ -1,4 +1,5 @@
-﻿using Rsb.EncodingIT.Huffman;
+﻿using Rsb.EncodingIT.Analyzer.Bootstrap;
+using Rsb.EncodingIT.Analyzer.Interfaces;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -13,74 +14,55 @@ namespace Rsb.EncodingIT
     {
         public static void Main(string[] args)
         {
-            int a = 123;
-            byte b = 1;
+            //var operation = args[0];
+            //var file = args[1];
 
-            File.WriteAllBytes(@"C:\temp\teste.txt", BitConverter. GetBytes(a));
+            //var operation = "-e";
+            //var file = @"C:\Temp\novo\alice29.txt";
 
-            HuffmanTree tree = new HuffmanTree();
+            var operation = "-d";
+            var file = @"C:\Temp\novo\alice29.rsb";
 
-            //var bytes = File.ReadAllBytes(@"F:\Unisinos\Teoria da Informação\cantrbry\alice29.txt");
-            var bytes = File.ReadAllBytes(@"C:\temp\eclipse.exe");
+            //var operation = "-e";
+            //var file = @"C:\Temp\novo\eclipse.exe";
 
-            //var inText = Encode("The quick brown fox jumps over the lazy programmer", tree);
+            //var operation = "-d";
+            //var file = @"C:\Temp\novo\eclipse.rsb";
 
-            var inText = Encode(Encoding.Unicode.GetString(bytes), tree);
+            //var operation = "-d";
+            //var file = @"C:\Temp\novo\sum.rsb";   
 
-            var table = SerializeFrequencies(tree.Frequencies.FrequencyTable);
+            var analyzer = default(IFileAnalyzer);
             
-            File.WriteAllBytes(@"C:\temp\eclipse_coded.txt", inText);
+            switch (operation)
+            {
+                case "-e":
+                    analyzer = new EncoderAnalyzer();
+                    Console.WriteLine("Running encoding...");
+                    break;
 
-            var readedBytes = File.ReadAllBytes(@"C:\temp\eclipse_coded.txt");
+                case "-d":
+                    analyzer = new DecoderAnalyzer();
+                    Console.WriteLine("Running decoding...");
+                    break;
 
-            var decoded = Decode(readedBytes, tree);
+                default:
+                    Console.WriteLine("Operação inválida: '-e' encoding e '-d' decoding");
+                    return;
+            }
 
-            var decodedBytes = Encoding.Unicode.GetBytes(decoded);
-
-            File.WriteAllBytes(@"C:\Temp\eclipse_novo.exe", decodedBytes);
-
-            Console.ReadKey();
-        }
-
-        private static MemoryStream SerializeFrequencies(Dictionary<char, int> frequencies)
-        {
-            var memory = new MemoryStream();
-            BinaryFormatter binaryFormatter = new BinaryFormatter();
-            binaryFormatter.Serialize(memory, frequencies);
-
-            return memory;
-        }
-
-        public static byte[] Encode(string input, HuffmanTree tree)
-        {             
-
-            tree.BuildTree(input); //Build the huffman tree
-
-            BitArray encoded = tree.Encode(input); //Encode the tree
-
-            //First show the generated binary output
-            Console.WriteLine(string.Join(string.Empty, encoded.Cast<bool>().Select(bit => bit ? "1" : "0")));
-
-            //Next, convert the binary output to the new characterized output string.       
-            byte[] bytes = new byte[(encoded.Length / 8) + 1];
-            encoded.CopyTo(bytes, 0);
-
-            //string inText = Encoding.ASCII.GetString(bytes);
-            //Console.WriteLine(inText); //Write the compressed output to the textbox.
-            return bytes;
-        }
-
-        public static string Decode(byte[] bytes, HuffmanTree tree)
-        {
-            //First convert the compressed output to a bit array again again and skip trailing bits.            
-            //var bytes = Encoding.ASCII.GetBytes(input);
-
-            bool[] boolAr = new BitArray(bytes).Cast<bool>().Take(tree.BitCountForTree).ToArray();
-            BitArray encoded = new BitArray(boolAr);
-
-            string decoded = tree.Decode(encoded);
-            //Console.WriteLine("Decoded result: " + decoded);
-            return decoded;
-        }
+            try
+            {
+                analyzer.Analyze(file);
+            }            
+            catch (FileNotFoundException ex)
+            {
+                Console.WriteLine("File was not found: " + ex.Message);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("An error occured");
+            }
+        }       
     }
 }
