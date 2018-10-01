@@ -15,14 +15,19 @@ namespace Rsb.EncodingIT
     {
         public static void Main(string[] args)
         {
-            //var operation = args[0];
-            //var file = args[1];
+            if (args.Length < 2)
+            {
+                Console.WriteLine("Invalid parameters. -e or -d <file>");
+                return;
+            }
+            var operation = args[0];
+            var file = args[1];
 
             //var operation = "-e";
             //var file = @"C:\Temp\novo\alice29.txt";
 
-            var operation = "-d";
-            var file = @"C:\Temp\novo\alice29.rsb";
+            //var operation = "-d";
+            //var file = @"C:\Temp\novo\alice29.rsb";
 
             //var operation = "-e";
             //var file = @"C:\Temp\novo\eclipse.exe";
@@ -38,17 +43,7 @@ namespace Rsb.EncodingIT
 
             //var operation = "-e";
             //var file = @"C:\Temp\novo\teste.txt";   
-
-
-            //var bytes = File.ReadAllBytes(file);
-            //LZWCompress lZWCompress = new LZWCompress();
-            //var ints = lZWCompress.Compress(Encoding.ASCII.GetString(bytes));
-            //LZWDecompress lZWDecompress = new LZWDecompress();
-            //var str = ints.Select(i => Convert.ToString(i)).ToList();
-            //var strN = string.Join(' ', str);
-            //var decompressed = lZWDecompress.Decompress(strN);
-            //var stringss = Encoding.ASCII.GetString(decompressed);
-
+            
             var analyzer = default(IFileAnalyzer);
             
             switch (operation)
