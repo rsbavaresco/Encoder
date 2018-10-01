@@ -29,10 +29,11 @@ namespace Rsb.EncodingIT.Decoder
         }
 
         private void DeserializeHuffmanMetadata()
-        {
+        {            
             var memory = new MemoryStream(_huffmanMetadata);
             var formatter = new BinaryFormatter();
-            var reader = new BinaryReader(memory);
+            var reader = new BinaryReader(memory);            
+
             var bits = reader.ReadInt32();
 
             var huffmanFrequencyTable = (Dictionary<char, int>) formatter.Deserialize(memory);

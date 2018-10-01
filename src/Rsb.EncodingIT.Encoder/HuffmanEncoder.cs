@@ -39,8 +39,9 @@ namespace Rsb.EncodingIT.Encoder
             memory.Write(bits, 0, bits.Length);            
 
             binaryWriter.Serialize(memory, _tree.Frequencies.FrequencyTable);
-            memory.Position = 0;
+            memory.Position = 0;            
             HuffmanMetadata = memory.ToArray();
+
             memory.Close();
         }
 

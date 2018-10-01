@@ -21,8 +21,8 @@ namespace Rsb.EncodingIT
             //var operation = "-e";
             //var file = @"C:\Temp\novo\alice29.txt";
 
-            //var operation = "-d";
-            //var file = @"C:\Temp\novo\alice29.rsb";
+            var operation = "-d";
+            var file = @"C:\Temp\novo\alice29.rsb";
 
             //var operation = "-e";
             //var file = @"C:\Temp\novo\eclipse.exe";
@@ -30,11 +30,14 @@ namespace Rsb.EncodingIT
             //var operation = "-d";
             //var file = @"C:\Temp\novo\eclipse.rsb";
 
-            var operation = "-d";
-            var file = @"C:\Temp\novo\sum.rsb";   
+            //var operation = "-d";
+            //var file = @"C:\Temp\novo\sum.rsb";   
 
             //var operation = "-e";
             //var file = @"C:\Temp\novo\sum";   
+
+            //var operation = "-e";
+            //var file = @"C:\Temp\novo\teste.txt";   
 
 
             //var bytes = File.ReadAllBytes(file);
