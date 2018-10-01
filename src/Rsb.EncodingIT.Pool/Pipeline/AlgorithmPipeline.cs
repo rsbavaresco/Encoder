@@ -8,6 +8,6 @@ namespace Rsb.EncodingIT.Pool.Pipeline
     {
         Invalid = 0, //2b 00
         RLE_Huffman = 1, //2b 01
-        LZ78_Huffman = 2 ////2b 10
+        LZW_Huffman = 2 ////2b 10
     }
 }

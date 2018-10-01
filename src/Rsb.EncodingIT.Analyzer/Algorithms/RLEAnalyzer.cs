@@ -10,8 +10,14 @@ namespace Rsb.EncodingIT.Analyzer.Algorithms
     {
         public bool Analyze(SourceFile file)
         {
-            //throw new NotImplementedException();
+            var content = file.Content;
             return false;
+
+        }
+
+        public int Analyze(byte[] bytes)
+        {
+            return 0;
         }
     }
 }

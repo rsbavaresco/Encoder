@@ -8,17 +8,17 @@ using System.Text;
 
 namespace Rsb.EncodingIT.Encoder.Pipelines
 {
-    public class RLE_HuffmanPipeline : IPipelineRunner
+    public class LZW_HuffmanPipeline : IPipelineRunner
     {
-        public readonly AlgorithmPipeline Pipeline = AlgorithmPipeline.RLE_Huffman;
+        public readonly AlgorithmPipeline Pipeline = AlgorithmPipeline.LZW_Huffman;
 
         public EncodedFile Run(SourceFile source)
         {
-            var rleEncoder = new RleEncoder();
+            var lzwEncoder = new LZWEncoder();
             var huffmanEncoder = new HuffmanEncoder();
 
-            var outRle = rleEncoder.Encode(source.Content);                        
-            var outHuffman = huffmanEncoder.Encode(outRle);
+            var outlzw = lzwEncoder.Encode(source.Content);
+            var outHuffman = huffmanEncoder.Encode(outlzw);
 
             var header = new FileHeader(Pipeline, huffmanEncoder.HuffmanMetadata, source.Extension);
             var encodedFile = new EncodedFile(header, outHuffman);

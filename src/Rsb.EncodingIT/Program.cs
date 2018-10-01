@@ -1,5 +1,6 @@
 ﻿using Rsb.EncodingIT.Analyzer.Bootstrap;
 using Rsb.EncodingIT.Analyzer.Interfaces;
+using Rsb.EncodingIT.Pool.LZW;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -20,8 +21,8 @@ namespace Rsb.EncodingIT
             //var operation = "-e";
             //var file = @"C:\Temp\novo\alice29.txt";
 
-            var operation = "-d";
-            var file = @"C:\Temp\novo\alice29.rsb";
+            //var operation = "-d";
+            //var file = @"C:\Temp\novo\alice29.rsb";
 
             //var operation = "-e";
             //var file = @"C:\Temp\novo\eclipse.exe";
@@ -29,8 +30,21 @@ namespace Rsb.EncodingIT
             //var operation = "-d";
             //var file = @"C:\Temp\novo\eclipse.rsb";
 
-            //var operation = "-d";
-            //var file = @"C:\Temp\novo\sum.rsb";   
+            var operation = "-d";
+            var file = @"C:\Temp\novo\sum.rsb";   
+
+            //var operation = "-e";
+            //var file = @"C:\Temp\novo\sum";   
+
+
+            //var bytes = File.ReadAllBytes(file);
+            //LZWCompress lZWCompress = new LZWCompress();
+            //var ints = lZWCompress.Compress(Encoding.ASCII.GetString(bytes));
+            //LZWDecompress lZWDecompress = new LZWDecompress();
+            //var str = ints.Select(i => Convert.ToString(i)).ToList();
+            //var strN = string.Join(' ', str);
+            //var decompressed = lZWDecompress.Decompress(strN);
+            //var stringss = Encoding.ASCII.GetString(decompressed);
 
             var analyzer = default(IFileAnalyzer);
             

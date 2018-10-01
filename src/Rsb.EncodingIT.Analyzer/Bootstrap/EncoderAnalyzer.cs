@@ -2,8 +2,10 @@
 using Rsb.EncodingIT.Analyzer.Interfaces;
 using Rsb.EncodingIT.Data;
 using Rsb.EncodingIT.Encoder;
+using Rsb.EncodingIT.Encoder.Interfaces;
 using Rsb.EncodingIT.Encoder.Pipelines;
 using Rsb.EncodingIT.Models.Coded;
+using Rsb.EncodingIT.Pool.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -11,12 +13,7 @@ using System.Text;
 namespace Rsb.EncodingIT.Analyzer.Bootstrap
 {
     public class EncoderAnalyzer : IFileAnalyzer
-    {
-        public EncoderAnalyzer()
-        {
-
-        }
-
+    { 
         public void Analyze(string path)
         {
             var reader = new FileReader();
@@ -25,15 +22,29 @@ namespace Rsb.EncodingIT.Analyzer.Bootstrap
             var source = reader.ReadSource(path);
 
             var rleAnalyzer = new RLEAnalyzer();
-            var rle = rleAnalyzer.Analyze(source);
-            
-            var pipeline = new RLE_HuffmanPipeline();
-            var encoded = pipeline.Run(source);
+            var shouldUseRle = rleAnalyzer.Analyze(source);
+
+            var encoded = default(EncodedFile);
+            var pipeline = default(IPipelineRunner);
+
+            if (shouldUseRle)
+                pipeline = new RLE_HuffmanPipeline();                
+            else
+                pipeline = new LZW_HuffmanPipeline();
+
+            try
+            {
+                encoded = pipeline.Run(source);
+            }
+            catch (RleException)
+            {
+                pipeline = new LZW_HuffmanPipeline();
+                encoded = pipeline.Run(source);
+            }
+
             encoded.SetPath(path);
 
             writer.WriteEncoded(encoded);
         }
-
-
     }
 }
